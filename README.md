@@ -38,6 +38,7 @@ commands:
 commands: 
 * python3 solutions.py sqlite transactions.db task2
 * python3 solutions.py postgresql postgresql://postgres:postgres@localhost transactions.db task2
+
 **TASK2 Write a Python script to find out on which day most revenue for users who ordered via a mobile phone was created..**
 
 **Query:** most_revenue_day_query = "SELECT strftime('%Y-%m-%d', t.datetime), sum(t.revenue) total_revenue FROM Transactions t JOIN Devices d ON t.device_type = d.id WHERE d.device_name = 'Mobile Phone' GROUP BY strftime('%Y-%m-%d', `datetime`) ORDER BY total_revenue DESC LIMIT 1"
@@ -49,6 +50,7 @@ commands:
 commands: 
 * python3 solutions.py sqlite transactions.db task3
 * python3 solutions.py postgresql postgresql://postgres:postgres@localhost transactions.db task3
+
 **TASK3 Write a Python script that combines the contents of Devices and Transactions and store it as a single flat file including the column names.**
 
 **Query**: task3_query = 'SELECT t.*, d.device_name device_name FROM Transactions t JOIN Devices d on t.device_type = d.id'
