@@ -74,11 +74,15 @@ commands:
 
 **Query**: update_query = ``` UPDATE Transactions SET revenue = revenue * ? WHERE strftime('%Y-%m-%d', datetime) = ? ```
 
- ```python c.execute(update_query, (cur, date))```
+ ```python 
+ c.execute(update_query, (cur, date))
+ ```
 
 **PostgreSQL Changes**: '''UPDATE "Transactions" SET revenue = revenue * %s WHERE %s = TO_CHAR(datetime, 'YYYY-MM-DD')'''
 
- ```python c.execute(update_query, (cur,date)) ```
+ ```python 
+ c.execute(update_query, (cur,date)) 
+ ```
  ![image](https://user-images.githubusercontent.com/45731847/178434127-b9b77323-9d19-417a-a2d3-cfaf5b593d3a.png)
 
 - Explanation: xml file is parsed with lxml etree, root is assigned and children 'Cubes' are found. Namespaces must be removed or given manually to be able to findall children. For every child, if the attrib is time, assigned to the dict as the key as date, if the attrib is currency, assigned to the dict as the value for that date. For every key, value pair in the dict the values are updated in both of the databases.
