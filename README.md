@@ -70,7 +70,7 @@ commands:
 * python3 solutions.py sqlite transactions.db task4
 * python3 solutions.py postgresql postgresql://postgres:postgres@localhost transactions.db task4
 
-**TASK4 TASK4 Update the data stored in the database to have the created revenue in EUR.**
+**TASK4 Update the data stored in the database to have the created revenue in EUR.**
 
 **Query**: update_query = ``` UPDATE Transactions SET revenue = revenue * ? WHERE strftime('%Y-%m-%d', datetime) = ? ```
  ```sql c.execute(update_query, (cur, date))```
