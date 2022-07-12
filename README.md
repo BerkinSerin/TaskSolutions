@@ -59,3 +59,25 @@ commands:
 **PostgreSQL Changes**: "" around the table names, file named _psql.csv
 ![image](https://user-images.githubusercontent.com/45731847/178432129-1ad53bba-d3cd-49b2-89ef-31cdc1c36095.png)
 
+# Task 4 Solution:
+commands: 
+* python3 solutions.py sqlite transactions.db task4
+* python3 solutions.py postgresql postgresql://postgres:postgres@localhost transactions.db task4
+
+**TASK4 TASK4 Update the data stored in the database to have the created revenue in EUR.**
+
+**Query**: update_query = ```sql UPDATE Transactions SET revenue = revenue * ? WHERE strftime('%Y-%m-%d', datetime) = ? ```
+ ```sql c.execute(update_query, (cur, date))```
+
+**PostgreSQL Changes**: '''UPDATE "Transactions" SET revenue = revenue * %s WHERE %s = TO_CHAR(datetime, 'YYYY-MM-DD')'''
+ ```sql c.execute(update_query, (cur,date)) ```
+ ![image](https://user-images.githubusercontent.com/45731847/178434127-b9b77323-9d19-417a-a2d3-cfaf5b593d3a.png)
+
+- Explanation: xml file is parsed with lxml etree, root is assigned and children 'Cubes' are found. Namespaces must be removed or given manually to be able to findall children. For every child, if the attrib is time, assigned to the dict as the key as date, if the attrib is currency, assigned to the dict as the value for that date. For every key, value pair in the dict the values are updated in both of the databases.
+
+
+# Task 5 Solution:
+
+**TASK5 Imagine you have to add support for other DBMS, how would you address this request? Write a Python script that exemplarily uses PostgreSQL**
+
+To add support for other DBMS the data from sqlite has to be migrated. Migrating data is much easier on frameworks such as Django. But since there are only two tables and the tables are not large, converting them to CSVs and then migrating them to PostgreSQL is not costly. By the help of SQLAlchemy, data in CSV format are migrated into PostgreSQL. *postgresql_conversion* function creates the CSVs for all tables and connects to PostgreSQL, if table does not exist, creates it. *create_connection* function basically connects to the databases based on sql choices. 
