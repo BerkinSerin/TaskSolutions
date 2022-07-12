@@ -29,7 +29,10 @@ commands:
 
 **TASK1 Write a Python script to find out which visitor created the most revenue.**
 
-**Query**: most_revenue_query = ``` 'SELECT visitor_id, SUM(revenue) total_revenue FROM Transactions GROUP BY visitor_id ORDER BY 2 DESC LIMIT 1' ```
+**Query**: most_revenue_query = 
+```sql 
+'SELECT visitor_id, SUM(revenue) total_revenue FROM Transactions GROUP BY visitor_id ORDER BY 2 DESC LIMIT 1' 
+```
 
 
 **PostgreSQL Changes:** Only "" around the table names.
