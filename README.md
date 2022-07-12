@@ -89,7 +89,8 @@ UPDATE Transactions SET revenue = revenue * ? WHERE strftime('%Y-%m-%d', datetim
  c.execute(update_query, (cur, date))
  ```
 
-**PostgreSQL Changes**: '''sql
+**PostgreSQL Changes**: 
+'''sql
 UPDATE "Transactions" SET revenue = revenue * %s WHERE %s = TO_CHAR(datetime, 'YYYY-MM-DD')
 '''
 
