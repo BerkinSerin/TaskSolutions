@@ -45,7 +45,10 @@ commands:
 
 **TASK2 Write a Python script to find out on which day most revenue for users who ordered via a mobile phone was created..**
 
-**Query:** most_revenue_day_query = ``` "SELECT strftime('%Y-%m-%d', t.datetime), sum(t.revenue) total_revenue FROM Transactions t JOIN Devices d ON t.device_type = d.id WHERE d.device_name = 'Mobile Phone' GROUP BY strftime('%Y-%m-%d', `datetime`) ORDER BY total_revenue DESC LIMIT 1" ```
+**Query:** most_revenue_day_query =
+```sql 
+"SELECT strftime('%Y-%m-%d', t.datetime), sum(t.revenue) total_revenue FROM Transactions t JOIN Devices d ON t.device_type = d.id WHERE d.device_name = 'Mobile Phone' GROUP BY strftime('%Y-%m-%d', `datetime`) ORDER BY total_revenue DESC LIMIT 1" 
+```
 
 **PostgreSQL Changes:** "" around the table names, TO_CHAR(t.datetime, 'YYYY-MM-DD') instead of strftime functions
 ![image](https://user-images.githubusercontent.com/45731847/178431147-ef8f387d-6c06-4684-8063-13d402952d25.png)
@@ -57,8 +60,10 @@ commands:
 
 **TASK3 Write a Python script that combines the contents of Devices and Transactions and store it as a single flat file including the column names.**
 
-**Query**: task3_query = ``` 'SELECT t.*, d.device_name device_name FROM Transactions t JOIN Devices d on t.device_type = d.id' ```
-
+**Query**: task3_query = 
+```sql
+'SELECT t.*, d.device_name device_name FROM Transactions t JOIN Devices d on t.device_type = d.id' 
+```
 
 ```python
 df = pd.DataFrame(pd.read_sql_query(task3_query, con))
@@ -75,13 +80,18 @@ commands:
 
 **TASK4 Update the data stored in the database to have the created revenue in EUR.**
 
-**Query**: update_query = ``` UPDATE Transactions SET revenue = revenue * ? WHERE strftime('%Y-%m-%d', datetime) = ? ```
+**Query**: update_query =
+```sql 
+UPDATE Transactions SET revenue = revenue * ? WHERE strftime('%Y-%m-%d', datetime) = ? 
+```
 
  ```python 
  c.execute(update_query, (cur, date))
  ```
 
-**PostgreSQL Changes**: '''UPDATE "Transactions" SET revenue = revenue * %s WHERE %s = TO_CHAR(datetime, 'YYYY-MM-DD')'''
+**PostgreSQL Changes**: '''sql
+UPDATE "Transactions" SET revenue = revenue * %s WHERE %s = TO_CHAR(datetime, 'YYYY-MM-DD')
+'''
 
  ```python 
  c.execute(update_query, (cur,date)) 
