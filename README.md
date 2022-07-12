@@ -56,6 +56,12 @@ commands:
 
 **Query**: task3_query = ``` 'SELECT t.*, d.device_name device_name FROM Transactions t JOIN Devices d on t.device_type = d.id' ```
 
+
+```python
+df = pd.DataFrame(pd.read_sql_query(task3_query, con))
+df.to_csv('task3_psql.csv', index=False)
+```
+
 **PostgreSQL Changes**: "" around the table names, file named _psql.csv
 ![image](https://user-images.githubusercontent.com/45731847/178432129-1ad53bba-d3cd-49b2-89ef-31cdc1c36095.png)
 
