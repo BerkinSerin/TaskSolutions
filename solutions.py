@@ -211,7 +211,7 @@ def task4(cursorObj, sql_type, con, xml_file, namespace):
     c = con.cursor()
     # print the state before update
     print('Query Results Before EUR Conversion:')
-    c.execute('SELECT id ,datetime, revenue FROM "Transactions" LIMIT 5')
+    c.execute('SELECT id ,datetime, revenue FROM "Transactions" ORDER BY id LIMIT 5')
     print(c.fetchall())
     for k, v in dates_cur_dict.items():
         date = k
@@ -227,7 +227,7 @@ def task4(cursorObj, sql_type, con, xml_file, namespace):
 
     # print the state after update
     print('\nQuery Results After EUR Conversion:')
-    c.execute('SELECT id, datetime, revenue FROM "Transactions" LIMIT 5')
+    c.execute('SELECT id, datetime, revenue FROM "Transactions" ORDER BY id LIMIT 5')
     print(c.fetchall())
     con.close()
 
