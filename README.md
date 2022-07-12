@@ -29,7 +29,7 @@ commands:
 
 **TASK1 Write a Python script to find out which visitor created the most revenue.**
 
-**Query**: most_revenue_query = ```sql 'SELECT visitor_id, SUM(revenue) total_revenue FROM Transactions GROUP BY visitor_id ORDER BY 2 DESC LIMIT 1' ```
+**Query**: most_revenue_query = ``` 'SELECT visitor_id, SUM(revenue) total_revenue FROM Transactions GROUP BY visitor_id ORDER BY 2 DESC LIMIT 1' ```
 
 
 **PostgreSQL Changes:** Only "" around the table names.
@@ -42,7 +42,7 @@ commands:
 
 **TASK2 Write a Python script to find out on which day most revenue for users who ordered via a mobile phone was created..**
 
-**Query:** most_revenue_day_query = ```sql "SELECT strftime('%Y-%m-%d', t.datetime), sum(t.revenue) total_revenue FROM Transactions t JOIN Devices d ON t.device_type = d.id WHERE d.device_name = 'Mobile Phone' GROUP BY strftime('%Y-%m-%d', `datetime`) ORDER BY total_revenue DESC LIMIT 1" ```
+**Query:** most_revenue_day_query = ``` "SELECT strftime('%Y-%m-%d', t.datetime), sum(t.revenue) total_revenue FROM Transactions t JOIN Devices d ON t.device_type = d.id WHERE d.device_name = 'Mobile Phone' GROUP BY strftime('%Y-%m-%d', `datetime`) ORDER BY total_revenue DESC LIMIT 1" ```
 
 **PostgreSQL Changes:** "" around the table names, TO_CHAR(t.datetime, 'YYYY-MM-DD') instead of strftime functions
 ![image](https://user-images.githubusercontent.com/45731847/178431147-ef8f387d-6c06-4684-8063-13d402952d25.png)
@@ -54,7 +54,7 @@ commands:
 
 **TASK3 Write a Python script that combines the contents of Devices and Transactions and store it as a single flat file including the column names.**
 
-**Query**: task3_query = ```sql 'SELECT t.*, d.device_name device_name FROM Transactions t JOIN Devices d on t.device_type = d.id' ```
+**Query**: task3_query = ``` 'SELECT t.*, d.device_name device_name FROM Transactions t JOIN Devices d on t.device_type = d.id' ```
 
 **PostgreSQL Changes**: "" around the table names, file named _psql.csv
 ![image](https://user-images.githubusercontent.com/45731847/178432129-1ad53bba-d3cd-49b2-89ef-31cdc1c36095.png)
@@ -66,7 +66,7 @@ commands:
 
 **TASK4 TASK4 Update the data stored in the database to have the created revenue in EUR.**
 
-**Query**: update_query = ```sql UPDATE Transactions SET revenue = revenue * ? WHERE strftime('%Y-%m-%d', datetime) = ? ```
+**Query**: update_query = ``` UPDATE Transactions SET revenue = revenue * ? WHERE strftime('%Y-%m-%d', datetime) = ? ```
  ```sql c.execute(update_query, (cur, date))```
 
 **PostgreSQL Changes**: '''UPDATE "Transactions" SET revenue = revenue * %s WHERE %s = TO_CHAR(datetime, 'YYYY-MM-DD')'''
